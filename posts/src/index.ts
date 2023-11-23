@@ -4,10 +4,13 @@ sourceMapSupport.install();
 import express from "express";
 import bodyParser from "body-parser";
 import { randomBytes } from "crypto";
+import cors from "cors";
+import axios from "axios";
 
 console.log("Initializing posts service");
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 const posts: Map<string, { id?: string; title?: string }> = new Map();
@@ -17,7 +20,7 @@ app.get("/posts", (req, res) => {
   res.send(Array.from(posts.values()));
 });
 
-app.post("/posts", (req, res) => {
+app.post("/posts", async (req, res) => {
   const id = randomBytes(4).toString("hex");
   const { title } = req.body;
 
@@ -26,7 +29,26 @@ app.post("/posts", (req, res) => {
     title: title,
   });
 
+  console.log('sending event "PostCreated"');
+  await axios
+    .post("http://localhost:4005/events", {
+      type: "PostCreated",
+      data: {
+        id,
+        title,
+      },
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
   res.status(201).send(posts.get(id));
+});
+
+app.post("/events", (req, res) => {
+  console.log("Event received", req.body.type);
+
+  res.send({});
 });
 
 app.listen(4000, () => {
