@@ -1,0 +1,5 @@
+docker build -t luiszunigacr/ms-posts -f $PWD/posts/Dockerfile posts/
+docker build -t luiszunigacr/ms-comments -f $PWD/comments/Dockerfile comments/
+docker build -t luiszunigacr/ms-query -f $PWD/posts/Dockerfile query/
+docker build -t luiszunigacr/ms-moderation -f $PWD/posts/Dockerfile moderation/
+docker build -t luiszunigacr/ms-event-bus -f $PWD/posts/Dockerfile event-bus/

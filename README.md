@@ -1,14 +1,20 @@
 ## Build images
 
-docker build -t ms-posts .
-docker build -t ms-comments .
-docker build -t ms-query .
-docker build -t ms-moderation .
-docker build -t ms-event-bus .
+On the root folder that contains all the microservices, execute the command:
+```bash
+bash dockerBuildImages
+```
 
-## Run containers
-docker run ms-posts
-docker run ms-comments
-docker run ms-query
-docker run ms-moderation
-docker run ms-event-bus
+Or run each of the following commands (positioned inside each folder):
+
+docker build -t luiszunigacr/ms-posts .
+docker build -t luiszunigacr/ms-comments .
+docker build -t luiszunigacr/ms-query .
+docker build -t luiszunigacr/ms-moderation .
+docker build -t luiszunigacr/ms-event-bus .
+
+## Restart  deployment
+After updating a micro-service and building/pushing the image, restart the deployment like so:
+```bash
+kubectl rollout restart deployment [deployment-name]
+```
