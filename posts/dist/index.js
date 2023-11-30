@@ -37,7 +37,7 @@ app.post("/posts", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     });
     console.log('sending event "PostCreated"');
     yield axios_1.default
-        .post("http://localhost:4005/events", {
+        .post("http://event-bus-srv:4005/events", {
         type: "PostCreated",
         data: {
             id,
@@ -54,6 +54,7 @@ app.post("/events", (req, res) => {
     res.send({});
 });
 app.listen(4000, () => {
+    console.log("v2. 2023/11/27, 10:16");
     console.log("Listening on 4000");
 });
 //# sourceMappingURL=index.js.map
