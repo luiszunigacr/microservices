@@ -40,7 +40,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     commentsByPostId[req.params.id] = comments;
     console.log('sending event "CommentCreated" v2');
     yield axios_1.default
-        .post("http://localhost:4005/events", {
+        .post("http://event-bus-srv:4005/events", {
         type: "CommentCreated",
         data: Object.assign(Object.assign({}, comment), { postId: req.params.id }),
     })
@@ -59,7 +59,7 @@ app.post("/events", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (comment) {
             comment.status = status;
             yield axios_1.default
-                .post("http://localhost:4005/events", {
+                .post("http://event-bus-srv:4005/events", {
                 type: "CommentUpdated",
                 data: {
                     id,
