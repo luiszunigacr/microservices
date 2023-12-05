@@ -28,7 +28,7 @@ app.get("/posts", (req, res) => {
     console.log("get posts:", posts.values());
     res.send(Array.from(posts.values()));
 });
-app.post("/posts", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/posts/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = (0, crypto_1.randomBytes)(4).toString("hex");
     const { title } = req.body;
     posts.set(id, {
