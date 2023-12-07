@@ -30,3 +30,10 @@ After updating a micro-service and building/pushing the image, restart the deplo
 ```bash
 kubectl rollout restart deployment [deployment-name]
 ```
+
+## Skaffold
+Skaffold is being used to automatically deploy into the local dev k8s cluster any changes made on the code. To start it, run the following command while positioned on the folder where the skaffold.yaml file is.
+```bash
+skaffold dev
+```
+The process will keep running and listening for changes, when you want to stop working on this project, just press Ctrl-C to kill the Skaffold process and it will delete all the deployments, services and other k8s objects that it manages.
